@@ -23,7 +23,7 @@ userDatabase = Dict()
 #   }
 
 function newUser(target)
-    print()
+    println()
     print("Adding new user ")
     print(target["OrderId"])
     userDatabase[target["OrderId"]] = Dict(
@@ -34,9 +34,9 @@ function newUser(target)
     )
 
 end
-g
+
 function addToUser(uid, target)
-    print()
+    println()
     print("Updating user ")
     print(target["OrderId"])
     #Emails
@@ -92,7 +92,7 @@ function findRecord(target)
         findUser = searchCriterias(user, target)
         #if search ends, break out of loop
         if (findUser)
-            addToUser(uid,target)
+            addToUser(user,target)
             userFound = true
             break
         end
