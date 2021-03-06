@@ -27,14 +27,14 @@ function newUser(target)
     print("Adding new user ")
     print(target["OrderId"])
     userDatabase[target["OrderId"]] = Dict(
-        "Emails" => target["Email"],
-        "Phones" => target["Phone"],
-        "OrderIds" => target["OrderId"],
+        "Emails" => [target["Email"]],
+        "Phones" => [target["Phone"]],
+        "OrderIds" => [target["OrderId"]],
         "TotalContacts" => target["Contacts"]
     )
 
 end
-
+g
 function addToUser(uid, target)
     print()
     print("Updating user ")
