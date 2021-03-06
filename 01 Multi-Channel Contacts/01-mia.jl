@@ -1,10 +1,12 @@
 #Import modules
 #import Pkg; Pkg.add("DataFrames")
 #import Pkg; Pkg.add("JSONTables")
+import Pkg; Pkg.add("CSV")
 
 #Using the following modules
 using JSON
 using DataFrames, JSONTables
+using CSV
 
 #Parse file
 parsedFile = JSON.parsefile("contacts.json")
@@ -30,6 +32,7 @@ function newUser(target)
         "Emails" => [target["Email"]],
         "Phones" => [target["Phone"]],
         "OrderIds" => [target["OrderId"]],
+        "TicketIds" => [target["Id"]],
         "TotalContacts" => target["Contacts"]
     )
 
@@ -80,7 +83,7 @@ function searchCriterias(uid, target)
 end
 
 #Find record
-function findRecord(target)
+function findRecord(target, searchType="Normal")
     #variable to start search
     searchBegin = true
     userFound = false
@@ -92,13 +95,19 @@ function findRecord(target)
         findUser = searchCriterias(user, target)
         #if search ends, break out of loop
         if (findUser)
-            addToUser(user,target)
+            if (searchType=="Normal") 
+                addToUser(user,target)
+            else
+                return getTrace(user)
+            end
             userFound = true
             break
         end
     end
     if (!userFound)
-        newUser(target)
+        if (searchType=="Normal") 
+            newUser(target)
+        end
     end
 end
 
@@ -109,4 +118,26 @@ for (contact) in parsedFile
     findRecord(contact)
 end
 
-print(keys(userDatabase))
+println()
+print("Total Users: ")
+print(size(userDatabase))
+
+#Create databank to export
+exportIds = []
+exportDatabank = []
+for (contact) in parsedFile
+    userRecords = findRecord(contact,"Look")
+    ticketTrace = join(userDatabase[userRecords]["TicketIds"], "-")
+    totalcontacts = userDatabase[userRecords]["TotalContacts"]
+    output = ticketTrace * ", " * totalcontacts
+    push!(exportIds,contact)
+    push!(exportDatabank,output)
+end
+
+#Store them into data frame
+df = DataFrame(ticket_id = exportIds, 
+                ticket_trace/contact = exportDatabank 
+               )
+print(df)
+
+CSV.write("results\\miaResults.csv", df)
