@@ -143,7 +143,7 @@ efg = open("miaResults.csv", "w")
 
 #Store them into data frame
 df = DataFrame(ticket_id = exportIds, 
-                ticket_trace/contact = exportDatabank 
+                ticket_tracecontact = exportDatabank 
              )
 println()
 print("Exporting df")
