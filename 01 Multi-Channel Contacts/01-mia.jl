@@ -98,7 +98,7 @@ function findRecord(target, searchType="Normal")
             if (searchType=="Normal") 
                 addToUser(user,target)
             else
-                return getTrace(user)
+                return user
             end
             userFound = true
             break
@@ -110,7 +110,6 @@ function findRecord(target, searchType="Normal")
         end
     end
 end
-
 
 #Loop for each contact in json
 for (contact) in parsedFile
