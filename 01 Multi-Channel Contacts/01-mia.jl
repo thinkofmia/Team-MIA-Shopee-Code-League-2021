@@ -117,9 +117,9 @@ for (contact) in parsedFile
     findRecord(contact)
 end
 
-println()
-print("Total Users: ")
-print(size(userDatabase))
+println("Saving to list")
+#print("Total Users: ")
+#print(size(userDatabase))
 
 #Create databank to export
 exportIds = []
@@ -142,7 +142,7 @@ efg = open("miaResults.csv", "w")
 
 #Store them into data frame
 df = DataFrame(ticket_id = exportIds, 
-                ticket_tracecontact = exportDatabank 
+                ticket_trace_contact = exportDatabank 
              )
 println()
 print("Exporting df")
