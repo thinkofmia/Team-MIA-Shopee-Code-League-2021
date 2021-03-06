@@ -1,7 +1,7 @@
 #Import modules
 #import Pkg; Pkg.add("DataFrames")
 #import Pkg; Pkg.add("JSONTables")
-import Pkg; Pkg.add("CSV")
+#import Pkg; Pkg.add("CSV")
 
 #Using the following modules
 using JSON
@@ -134,10 +134,18 @@ for (contact) in parsedFile
     push!(exportDatabank,output)
 end
 
+#Writing CSV
+# new file created 
+touch("miaResults.csv")  
+  
+# file handling in write mode 
+efg = open("miaResults.csv", "w")  
+
 #Store them into data frame
 df = DataFrame(ticket_id = exportIds, 
                 ticket_trace/contact = exportDatabank 
-               )
-print(df)
+             )
+println()
+print("Exporting df")
 
-CSV.write("results\\miaResults.csv", df)
+CSV.write("miaResults.csv", df)
