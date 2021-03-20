@@ -20,12 +20,36 @@ Please help Shopee to find the minimum total noise value possible.
 #Variables
 line1 = ""
 line2 = ""
+allEng = []
 
 #Functions
+#Calculate noise in a group of engineers
 function calculateNoise(l,r, arrEngineers)
     noise = sum(arrEngineers[l:r]) * (r-l+1)
     println("Noise between index ",l," and ",r," : ",noise)
     return noise
+end
+
+#Calculate noise in all the groups
+function calculateAllNoises(N,K,arrDivide,arrEngineers)
+    start = 0
+    last = N
+    sum = 0
+    for i in 1:K-1
+        sum += calculateNoise(i,i+1,arrEngineers)
+    end
+    return sum
+end
+
+#Get minimum noise from all combination
+function getMinNoise(N,K, arrEngineers)
+    groups = K
+    for i in 1:N
+
+    end
+    
+    return minNoise
+
 end
 
 # Prompt to enter 1st line
@@ -43,7 +67,6 @@ println("Enter ",N," numbers in a line")
   
 line2 = readline()
 inputArr = split(line2, " ")
-allEng = []
 # Taking Input from user 
 for i in 1:N
    push!(allEng,parse(Int64, inputArr[i]))
