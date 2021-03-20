@@ -39,6 +39,6 @@ inputArr = split(line2, " ")
 allEng = []
 # Taking Input from user 
 for i in 1:N
-   push!(allEng,inputArr[i])
+   push!(allEng,parse(Int64, inputArr[i]))
 end 
 println("Engineers: ",line2)
