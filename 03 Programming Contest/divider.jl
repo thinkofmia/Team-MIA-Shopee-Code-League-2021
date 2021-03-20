@@ -66,13 +66,13 @@ function divideArray(arr, n, k)
                 # Find the maximum number 
                 # from i to l and the summ 
                 # from i to l 
-                max_ = calculateNoise(max_, arr[l],arr) 
+                min_ = calculateNoise(min_, arr[l],arr) 
                 summ += arr[l] 
   
                 # Find the summ of difference 
                 # of every element with the 
                 # maximum element 
-                diff = (l - i + 1) * max_ - summ 
+                diff = (l - i + 1) * min_ - summ 
   
                 # If the array can be divided 
                 if (j > 0)
